@@ -44,9 +44,10 @@ server {
 }
 
 server {
+
         listen 443 ssl http2;
         server_name your.server.com;
-
+        
         ssl_certificate /etc/nginx/ssl/your.server.com.chained.crt;
         ssl_certificate_key /etc/nginx/ssl/your.server.com.key;
 
