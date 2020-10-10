@@ -58,3 +58,23 @@ server {
     include snippets/phpmyadmin.conf;
 }
 </pre>
+
+
+<h2>Local nginx conf file for magento</h2>
+<pre>upstream fastcgi_backend {
+        server  unix:/run/php/php7.1-fpm.sock;
+}
+
+server {
+        listen 80;
+        server_name local.domain.com;
+
+        set $MAGE_ROOT /var/www/html/directory;
+        set $MAGE_MODE production;
+        include /var/www/html/directory/nginx.conf.sample;
+
+        location ~ /\.ht {
+                deny all;
+        }
+}
+</pre>
