@@ -32,7 +32,7 @@ innodb_log_file_size=1024M [This should be 25% of innodb_buffer_pool_size]
 <pre>sudo /etc/init.d/mysql stop && sudo /etc/init.d/mysql stop</pre>
 
 <h2>NGINX Conf file for magento</h2>
-<code>
+<pre>
 upstream fastcgi_backend {
     server  unix:/run/php/php7.1-fpm.sock;
 }
@@ -57,4 +57,4 @@ server {
 
     include snippets/phpmyadmin.conf;
 }
-</code>
+</pre>
