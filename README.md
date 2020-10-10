@@ -37,14 +37,13 @@ innodb_log_file_size=1024M [This should be 25% of innodb_buffer_pool_size]
 }
 
 server {
-    listen 80;
-    listen [::]:80;
-    server_name your.server.com;
-    return 301 https://$server_name$request_uri;
+        listen 80;
+        listen [::]:80;
+        server_name your.server.com;
+        return 301 https://$server_name$request_uri;
 }
 
 server {
-
         listen 443 ssl http2;
         server_name your.server.com;
         
@@ -55,5 +54,5 @@ server {
         set $MAGE_MODE production;
         include /var/www/html/your_project/nginx.conf.sample;
 
-        include snippets/phpmyadmin.conf;
+        #include snippets/phpmyadmin.conf;
 }</pre>
