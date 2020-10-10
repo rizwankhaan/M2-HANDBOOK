@@ -30,3 +30,32 @@ innodb_log_file_size=1024M [This should be 25% of innodb_buffer_pool_size]
 
 <h2>Restart Mysql Ubuntu</h2>
 <pre>sudo /etc/init.d/mysql stop && sudo /etc/init.d/mysql stop</pre>
+
+<h2>NGINX Conf file for magento</h2>
+<pre>
+upstream fastcgi_backend {
+        server  unix:/run/php/php7.1-fpm.sock;
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name your.server.com;
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+
+        listen 443 ssl http2;
+        server_name your.server.com;
+
+        ssl_certificate /etc/nginx/ssl/your.server.com.chained.crt;
+        ssl_certificate_key /etc/nginx/ssl/your.server.com.key;
+
+        set $MAGE_ROOT /var/www/html/you_project;
+        set $MAGE_MODE production;
+        include /var/www/html/your_project/nginx.conf.sample;
+
+        include snippets/phpmyadmin.conf;
+}
+</pre>
