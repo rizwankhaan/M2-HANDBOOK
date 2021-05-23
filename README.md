@@ -120,32 +120,33 @@ sudo apt-get update && sudo apt-get install elasticsearch
 ---- install m24 ----
 sudo bin/magento setup:install --base-url=http://my.local/ --db-host=localhost --db-name=my_db --db-user=root --db-password=root --admin-firstname=admin --admin-lastname=admin --admin-email=rkhan@example.com --admin-user=admin --admin-password=Admin@123 --language=en_US --currency=USD --timezone=America/Chicago --use-rewrites=1 --backend-frontname=admin --search-engine=elasticsearch7 --elasticsearch-host=localhost:9200 --elasticsearch-port=9200
 
------ Local virtualhost ----
------------------------------- virtual host -----------------------------
-<VirtualHost *:80>
-  ServerName custom.local
-  ## Vhost docroot
-  DocumentRoot "/var/www/html/custom_dir"
-  ## Directories, there should at least be a declaration for /var/www/html/custom_dir
+</pre>
 
-<Directory "var/www/html/custom_dir">
-    Options Indexes FollowSymlinks MultiViews
-    AllowOverride All
-    Require all granted
-</Directory>
-  ## Logging
-  ErrorLog "/var/log/apache2/error.log"
-  ServerSignature Off
-  CustomLog "/var/log/apache2/access.log" combined
-  ## Server aliases
-  ServerAlias www.custom.local
-  SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
-    <IfModule mod_fastcgi.c>
-                AddHandler php7.4-fcgi .php
-                Action php7.4-fcgi /php7.4-fcgi virtual
-                Alias /php7.4-fcgi /usr/lib/cgi-bin/php7.4-fcgi-test.com
-                FastCgiExternalServer /usr/lib/cgi-bin/php7.4-fcgi-test.com -socket /var/run/php/php7.4-fpm-test.com.sock -pass-header Authorization
-    </IfModule>
-</VirtualHost>
+<h1>Virtual Host apache ubuntu</h1>
+<pre>
+    <VirtualHost *:80>
+      ServerName custom.local
+      ## Vhost docroot
+      DocumentRoot "/var/www/html/custom_dir"
+      ## Directories, there should at least be a declaration for /var/www/html/custom_dir
 
+    <Directory "var/www/html/custom_dir">
+        Options Indexes FollowSymlinks MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+      ## Logging
+      ErrorLog "/var/log/apache2/error.log"
+      ServerSignature Off
+      CustomLog "/var/log/apache2/access.log" combined
+      ## Server aliases
+      ServerAlias www.custom.local
+      SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+        <IfModule mod_fastcgi.c>
+                    AddHandler php7.4-fcgi .php
+                    Action php7.4-fcgi /php7.4-fcgi virtual
+                    Alias /php7.4-fcgi /usr/lib/cgi-bin/php7.4-fcgi-test.com
+                    FastCgiExternalServer /usr/lib/cgi-bin/php7.4-fcgi-test.com -socket /var/run/php/php7.4-fpm-test.com.sock -pass-header Authorization
+        </IfModule>
+    </VirtualHost>
 </pre>
