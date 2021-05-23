@@ -78,3 +78,46 @@ server {
         }
 }
 </pre>
+
+
+<h1>Ubuntu apache Mysql, Apache, php installation and configure steps</h1>
+<pre>
+sudo apt-get update
+sudo apt-get install apache2
+--------------------
+sudo apt-get install mysql-server mysql-client
+sudo mysql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+FLUSH PRIVILEGES;
+
+sudo apt-get install phpmyadmin
+sudo nano /etc/apache2/apache2.conf
+Include /etc/phpmyadmin/apache.conf >> add this line in the end.
+--------------------
+
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:ondrej/php
+sudo add-apt-repository ppa:ondrej/apache2
+sudo apt-get update
+
+sudo apt-get install php7.2 php7.2-mysql php7.2-curl php7.2-json php7.2-cgi php-mbstring php7.2-mbstring php7.2-gettext libapache2-mod-php7.2 && sudo apt-get install php7.1 php7.1-mysql php7.1-curl php7.1-json php7.1-cgi php-mbstring php7.1-mbstring php7.1-gettext libapache2-mod-php7.1 && sudo apt-get install php7.0 php7.0-mysql php7.0-curl php7.0-json php7.0-cgi php-mbstring php7.0-mbstring php7.0-gettext libapache2-mod-php7.0 && sudo apt-get install php7.3 php7.3-mysql php7.3-curl php7.3-json php7.3-cgi php-mbstring php7.3-mbstring php7.3-gettext libapache2-mod-php7.3 && sudo apt-get install php7.4 php7.4-mysql php7.4-curl php7.4-json php7.4-cgi php-mbstring php7.4-mbstring php7.4-gettext libapache2-mod-php7.4
+
+sudo apt install php7.1 libapache2-mod-php7.1 php7.1-common php7.1-gmp php7.1-curl php7.1-soap php7.1-bcmath php7.1-intl php7.1-mbstring php7.1-xmlrpc php7.1-mcrypt php7.1-mysql php7.1-gd php7.1-xml php7.1-cli php7.1-zip
+
+=> Activate rewrite module.
+sudo a2enmod rewrite
+sudo service apache2 restart
+
+---- Install ELASTICSEARCH ------
+curl -XGET 'localhost:9200'
+sudo service elasticsearch status
+sudo service elasticsearch restart
+sudo wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+sudo apt-get install apt-transport-https
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-7.x.list
+sudo apt-get update && sudo apt-get install elasticsearch
+
+---- install m24 ----
+sudo bin/magento setup:install --base-url=http://my.local/ --db-host=localhost --db-name=my_db --db-user=root --db-password=root --admin-firstname=admin --admin-lastname=admin --admin-email=rkhan@example.com --admin-user=admin --admin-password=Admin@123 --language=en_US --currency=USD --timezone=America/Chicago --use-rewrites=1 --backend-frontname=admin --search-engine=elasticsearch7 --elasticsearch-host=localhost:9200 --elasticsearch-port=9200
+
+</pre>
