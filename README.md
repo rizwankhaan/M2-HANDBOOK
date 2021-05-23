@@ -123,7 +123,7 @@ sudo bin/magento setup:install --base-url=http://my.local/ --db-host=localhost 
 </pre>
 
 <h1>Virtual Host apache ubuntu</h1>
-<pre>
+<code>
     <VirtualHost *:80>
       ServerName custom.local
       ## Vhost docroot
@@ -149,4 +149,4 @@ sudo bin/magento setup:install --base-url=http://my.local/ --db-host=localhost 
                     FastCgiExternalServer /usr/lib/cgi-bin/php7.4-fcgi-test.com -socket /var/run/php/php7.4-fpm-test.com.sock -pass-header Authorization
         </IfModule>
     </VirtualHost>
-</pre>
+</code>
